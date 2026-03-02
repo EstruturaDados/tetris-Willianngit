@@ -6,15 +6,15 @@
 #define TAM_PILHA 3
 
 typedef struct {
-    char nome; // 'I', 'O', 'T', 'L'
-    int id;    // identificador único
+    char nome; 
+    int id;    
 } Peca;
 
 typedef struct {
     Peca v[TAM_FILA];
-    int inicio;   // frente (dequeue)
-    int fim;      // próxima posição de enqueue
-    int qtd;      // quantidade atual
+    int inicio;   
+    int fim;      
+    int qtd;      
 } Fila;
 
 typedef struct {
@@ -78,7 +78,7 @@ int pop(Pilha *p, Peca *removida) {
     return 1;
 }
 
-/* ===== EXIBIÇÃO ===== */
+
 void mostrarFila(const Fila *f) {
     printf("Fila de peças\n");
     if (filaVazia(f)) {
@@ -122,7 +122,7 @@ void mostrarMenu(void) {
     printf("Opção: ");
 }
 
-/* Após uma ação válida, gerar nova peça e enfileirar para manter fila cheia. */
+
 void manterFilaCheia(Fila *f) {
     while (!filaCheia(f)) {
         enqueue(f, gerarPeca());
@@ -137,7 +137,7 @@ int main(void) {
     filaInit(&fila);
     pilhaInit(&pilha);
 
-    /* Inicializa a fila com 5 peças geradas automaticamente. */
+    
     manterFilaCheia(&fila);
 
     int op;
@@ -152,7 +152,7 @@ int main(void) {
             continue;
         }
 
-        if (op == 1) { /* Jogar peça: remove da fila, não volta. */
+        if (op == 1) { 
             Peca x;
             if (dequeue(&fila, &x)) {
                 printf("\nPeça jogada: [%c %d]\n", x.nome, x.id);
@@ -161,7 +161,7 @@ int main(void) {
                 printf("\nFila vazia (não deveria acontecer).\n");
             }
 
-        } else if (op == 2) { /* Reservar: tira da fila e tenta empilhar. */
+        } else if (op == 2) { 
             Peca x;
             if (!dequeue(&fila, &x)) {
                 printf("\nFila vazia (não deveria acontecer).\n");
@@ -172,12 +172,12 @@ int main(void) {
                 printf("\nPeça reservada: [%c %d]\n", x.nome, x.id);
                 manterFilaCheia(&fila);
             } else {
-                /* Se pilha estiver cheia, a peça NÃO deve voltar pro jogo. */
+                
                 printf("\nPilha cheia. Peça descartada: [%c %d]\n", x.nome, x.id);
                 manterFilaCheia(&fila);
             }
 
-        } else if (op == 3) { /* Usar reservada: pop da pilha, não volta. */
+        } else if (op == 3) { 
             Peca x;
             if (pop(&pilha, &x)) {
                 printf("\nPeça reservada usada: [%c %d]\n", x.nome, x.id);
