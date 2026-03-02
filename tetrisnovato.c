@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define N 5  // a fila deve conter exatamente 5 posições (capacidade)
+#define N 5  
 
 typedef struct {
-    char nome; // 'I', 'O', 'T', 'L'
-    int id;    // identificador único
+    char nome; 
+    int id;    
 } Peca;
 
 typedef struct {
     Peca v[N];
-    int inicio;   // aponta para a frente (de onde remove)
-    int fim;      // aponta para onde insere
-    int qtd;      // quantidade atual na fila
+    int inicio;   
+    int fim;      
+    int qtd;      
 } Fila;
 
-/* Gera peça automaticamente (nome aleatório, id crescente). */
+
 Peca gerarPeca(void) {
     static int proximoId = 0;
     const char tipos[] = {'I', 'O', 'T', 'L'};
@@ -35,7 +35,7 @@ void inicializarFila(Fila *f) {
 int filaCheia(Fila *f) { return f->qtd == N; }
 int filaVazia(Fila *f) { return f->qtd == 0; }
 
-/* Enqueue: insere no final se houver espaço. */
+
 int enqueue(Fila *f, Peca p) {
     if (filaCheia(f)) return 0;
 
@@ -45,7 +45,7 @@ int enqueue(Fila *f, Peca p) {
     return 1;
 }
 
-/* Dequeue: remove da frente se houver peça. */
+
 int dequeue(Fila *f, Peca *removida) {
     if (filaVazia(f)) return 0;
 
@@ -86,7 +86,7 @@ int main(void) {
     Fila fila;
     inicializarFila(&fila);
 
-    /* Inicializar a fila com 5 peças geradas automaticamente. */
+    
     for (int i = 0; i < N; i++) {
         enqueue(&fila, gerarPeca());
     }
